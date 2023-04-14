@@ -1,4 +1,4 @@
-# Service Worker
+# Introduktion til Service Worker
 En serviceworker er en speciel javascript fil og hele grundstenen i en progressiv web app. 
 
 Serviceworkeren placeres typisk i en *sw.js* fil på roden af dit website. Den dækker kun over det filscope som den er placeret i og derfor er det mest almindeligt at den placeres i rodbiblioteket.
