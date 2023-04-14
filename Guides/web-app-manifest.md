@@ -36,9 +36,3 @@ Du kan efterfølgende teste dit manifest i din browsers udviklingsværktøj.
 3. Klik på Manifest i menuen til venstre
 
 Her kan du se om dit manifest er sat rigtigt op eller om det har nogle mangler.
-
-
-
-
-
-
