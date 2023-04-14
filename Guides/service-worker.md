@@ -32,7 +32,7 @@ ____
 
 Når serviceworkeren er aktiveret har vi mulighed for at lytte på alle de forskellige fetch requests der bliver sendt fra sitet. Der med kan vi bruge serviceworkeren som en slags proxy server, hvor vi kan påvirke de svar der kommer fra serveren, inden de rammer browseren.
 ___
-**5. I tilfældet af en ny serviceworker**
+## Registrering af ny eller opdateret serviceworker
 
 Det kan blive lidt tricky hvis vi ændrer i en eksisterende eller opretter en ny serviceworker.
 
