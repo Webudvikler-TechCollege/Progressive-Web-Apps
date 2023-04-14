@@ -18,19 +18,53 @@ Herunder finder du en oversigt over dette cyklus:
 ___
 **1. Registrering**
 
-En serviceworker skal registreres i browseren og dette foregår fra en anden javascript fil. 
+En serviceworker skal registreres i browseren og dette foregår fra en anden javascript fil. De fleste browsere er kompatible med serviceworker men det er en god ide at tjekke.
+
+**Eksempel: (Fil: /js/app.js)**
+```javascript
+if('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./sw.js')
+	.then(reg => console.log('service worker registered', reg))
+	.catch(err => console.error('service worker not registered', err)) 
+}
+```
 ____
 **2. Installation**
 
-Derefter skal serviceworkeren installeres i browseren. Her har vi mulighed for at lytte på install eventet og køre forskellige handlinger i forbindelse med installationen. F.eks. kan vi lagre nødvendige filer i browserens cache til offline brug.
+Derefter skal serviceworkeren installeres i browseren. Her har vi mulighed for at lytte på install eventet og køre forskellige handlinger i forbindelse med installationen. F.eks. kan vi lagre nødvendige filer i browserens cache til offline brug. 
+
+**Eksempel: (Fil: sw.js)**
+```javascript
+// Install Service Worker
+self.addEventListener('install', event => {
+	console.log('Service Worker has been installed');
+})
+```
 ____
 **3. Aktivering**
 
 Når serviceworkeren er installeret skal den aktiveres. Her har vi også mulighed for at lytte på activate eventet og køre forskellige handlinger samtidigt.
+
+**Eksempel: (Fil: sw.js)**
+```javascript
+// Install Service Worker
+self.addEventListener('activate', event => {
+	console.log('Service Worker has been activated');
+})
+```
 ____
 **4. Fetch**
 
 Når serviceworkeren er aktiveret har vi mulighed for at lytte på alle de forskellige fetch requests der bliver sendt fra sitet. Der med kan vi bruge serviceworkeren som en slags proxy server, hvor vi kan påvirke de svar der kommer fra serveren, inden de rammer browseren.
+
+**Eksempel: (Fil: sw.js)**
+```javascript
+// Fetch event
+self.addEventListener('fetch', event => {
+	console.log('Fetch event', event)
+})
+```
+
 ___
 ## Registrering af ny eller opdateret serviceworker
 
