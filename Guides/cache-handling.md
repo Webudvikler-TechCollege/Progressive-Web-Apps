@@ -1,15 +1,15 @@
-# Cache handling
+# Håndtering af cache
 
 Caching af filer er en vigtig funktion i Progressive Web Apps (PWA), da det giver mulighed for at arbejde offline og en hurtigere indlæsning. Du kan kontrollere din Service Worker og javascripts indbyggede Cache API. Herunder kan du se hvordan du kan bruge Cache API til at implementere caching i din PWA.
 ___
-**Opret en ny cache:**
+## Opret en ny cache:
 ```js
 caches.open('my-cache').then(function(cache) {
   // Cache er åben
 });
 ```
 ___
-**Tilføj filer til cachen:**
+## Tilføj filer til cachen:
 
 Når du har oprettet cachen, kan du tilføje filer til den ved hjælp af metoderne `cache.add()` eller `cache.addAll()`:
 ```javascript
@@ -27,7 +27,7 @@ caches.open('my-cache').then(cache => {
 });
 ```
 ___
-**Hent filer fra cachen:**
+## Hent filer fra cachen:
 
 Du kan hente filer fra cachen ved at bruge `cache.match()` metoden:
 ```js
@@ -40,7 +40,7 @@ caches.match('/path/to/my/file.jpg').then(response => {
 });
 ```
 ___
-**Opdater filer i cachen:**
+## Opdater filer i cachen:**
 
 Du kan opdatere filer i cachen ved at tilføje dem igen ved hjælp af `cache.put()` metoden:
 ```js
@@ -49,7 +49,7 @@ caches.open('my-cache').then(cache => {
 });
 ```
 ___
-**Slet filer fra cachen:**
+## Slet filer fra cachen:**
 
 Du kan slette filer fra cachen ved at bruge `cache.delete()` metoden:
 
@@ -59,7 +59,7 @@ caches.open('my-cache').then(cache => {
 });
 ```
 ___
-**Håndter cache-fejl:** 
+## Håndter cache-fejl:
 
 Når du arbejder med cache, er det vigtigt at håndtere fejl korrekt. Du kan bruge `catch()` metoden til at håndtere fejl:
 ```js
@@ -70,7 +70,7 @@ caches.open('my-cache').then(cache => {
 });
 ```
 ___
-**Cache og asynkrone handlinger**
+## Cache og asynkrone handlinger
 
 Når en Service Worker aktiveres, kan den udføre en række opgaver, såsom at åbne en cache, hente og lagre filer, opdatere cachen osv. Hvis en Service Worker er færdig med at udføre disse opgaver, kan den blive deaktiveret af browseren for at spare på ressourcerne.
 
