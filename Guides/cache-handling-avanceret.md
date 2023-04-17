@@ -41,8 +41,9 @@ Nedenstående kode viser hvordan dette kan foregå.
 ```js
 // Fetch event
 self.addEventListener('fetch', event => {
-	// Kig efter file match i cache 
+	// Kontroller svar på request
 	event.respondWith(
+		// Kig efter file match i cache 
 		caches.match(event.request).then(cacheRes => {
 			// Returner match fra cache - ellers hent fil på server
 			return cacheRes || fetch(event.request).then(fetchRes => {
