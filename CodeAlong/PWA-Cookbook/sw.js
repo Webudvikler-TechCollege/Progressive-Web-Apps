@@ -17,6 +17,27 @@ const assets = [
 	'https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2'
 ]
 
+/**
+ * Funktion til at begrænse størrelsen af cache med
+ * @param {String} cacheName Navn på cache
+ * @param {Number} numAllowedFiles Antal tilladte filer
+ */
+const limitCacheSize = (cacheName, numAllowedFiles) => {
+	// Åbn den angivede cache
+	caches.open(cacheName).then(cache => {
+		// Hent array af cache keys
+		cache.keys().then(keys => {
+			// Hvis mængden af filer overstiger det tilladte
+			if(keys.length > numAllowedFiles) {
+				// Slet første index (ældste fil) og kør funktion igen indtil antal er nået
+				cache.delete(keys[0]).then(
+					limitCacheSize(cacheName, numAllowedFiles)
+				)
+			}
+		})
+	})
+}
+
 // Install event
 self.addEventListener('install', event => {
 	// Vent til alle opgaver er udført
@@ -54,6 +75,8 @@ self.addEventListener('activate', event => {
 
 // Fetch event
 self.addEventListener('fetch', event => {
+	limitCacheSize(dynamicCacheName, 2)
+
 	// Fix af problem med dynamisk cache og chrome-extension bug
 	if(!(event.request.url.indexOf('http') === 0)) return;
 
@@ -73,6 +96,9 @@ self.addEventListener('fetch', event => {
 
 					// Tilføj side til dynamisk cache
 					cache.put(event.request.url, fetchRes.clone())
+
+					// Kalder limit funktion
+					limitCacheSize(dynamicCacheName, 2)
 
 					// Returner request
 					return fetchRes
