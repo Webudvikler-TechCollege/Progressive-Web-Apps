@@ -24,6 +24,7 @@ self.addEventListener('fetch', event => {
 		// Kig efter file match i cache 
 		caches.match(event.request).then(cacheRes => {
 			// Returner match fra cache / hent fil på server
+			// ...
 		}).catch(() => {
 			// Hvis ovenstående giver fejl kaldes fallback siden			
 			return caches.match('/pages/fallback.html')
@@ -42,8 +43,10 @@ Dette kan vi gøre ved at kigge efter strengen `.html` i den fil der efterspørg
 
 **Eksempel:**
 ```js
-if(event.request.url.indexOf('.html') > -1) {
-	return caches.match('/pages/fallback.html')
-}
-
+// ...
+.catch(() => {
+	if(event.request.url.indexOf('.html') > -1) {
+		return caches.match('/pages/fallback.html')
+	}
+})
 ```
