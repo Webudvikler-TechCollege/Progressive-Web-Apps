@@ -1,5 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js'
-import { getFirestore, getDocs, collection, onSnapshot, query } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { getFirestore, collection, onSnapshot, query, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { renderRecipe } from './ui.js';
 
 // Firebase Config
 const firebaseConfig = {
@@ -14,6 +15,25 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+console.log(app);
 const db = getFirestore(app);
+enableIndexedDbPersistence(db)
 
-export { db }
+const getData = async collectionName => {
+  const q = query(collection(db, collectionName))
+  
+  const snapshot = onSnapshot(q, querySnapshot => {
+    querySnapshot.docChanges().forEach(change => {
+      if(change.type === "added") {
+        // Tilføj data til app
+        renderRecipe(change.doc.data(), change.doc.id)
+      }
+      if(change.type === "removed") {
+        // Fjern data fra app
+      }
+
+    })
+  })
+}
+
+export { db, getData }
