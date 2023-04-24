@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js'
 import { getFirestore, collection, onSnapshot, query, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
-import { renderRecipe } from './ui.js';
+import { renderRecipe, removeRecipe } from './ui.js';
 
 // Firebase Config
 const firebaseConfig = {
@@ -29,6 +29,7 @@ const getData = async collectionName => {
       }
       if(change.type === "removed") {
         // Fjern data fra app
+        removeRecipe(change.doc.id)
       }
 
     })

@@ -1,5 +1,5 @@
 import { db, getData } from "./firestore.config.js";
-import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { collection, addDoc, deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
 
 
 const data = await getData('dishes')
@@ -19,5 +19,12 @@ form.addEventListener('submit', async evt => {
 
 	form.title.value = ''
 	form.ingredients.value = ''
+})
 
+const recipesContainer = document.querySelector('.recipes')
+recipesContainer.addEventListener('click', async evt => {
+	if(evt.target.tagName === "I") {
+		const id = evt.target.getAttribute('data-id')
+		await deleteDoc(doc(db, 'dishes', id))
+	}
 })
