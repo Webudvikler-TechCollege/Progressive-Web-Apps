@@ -12,7 +12,7 @@ const renderRecipe = (data, id) => {
 
   const html = `
     <div class="card-panel recipe white row" id="${id}">
-      <img src="${data.image}" alt="recipe thumb" />
+      <img src=${data.image ? data.image : "./img/dish.png"} alt="recipe thumb" />
       <div class="recipe-details">
         <div class="recipe-title">${data.title}</div>
         <div class="recipe-ingredients">${data.ingredients}</div>
