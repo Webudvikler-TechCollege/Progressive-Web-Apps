@@ -1,5 +1,11 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js'
-import { getFirestore, collection, onSnapshot, query, enableIndexedDbPersistence } from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
+import { 
+  getFirestore, 
+  collection, 
+  onSnapshot, 
+  query, 
+  enableIndexedDbPersistence
+} from 'https://www.gstatic.com/firebasejs/9.20.0/firebase-firestore.js'
 import { renderRecipe, removeRecipe } from './ui.js';
 
 // Firebase Config
@@ -31,7 +37,6 @@ const getData = async collectionName => {
         // Fjern data fra app
         removeRecipe(change.doc.id)
       }
-
     })
   })
 }
